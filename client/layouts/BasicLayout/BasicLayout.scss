@@ -5,4 +5,8 @@
     background-color: $bakcground-grey-light;
     height: 100vh;
   }
+
+  &__left {
+    display: flex !important;
+  }
 }
