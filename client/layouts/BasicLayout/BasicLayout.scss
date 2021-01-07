@@ -1,9 +1,19 @@
 .basic-layout {
   min-height: 100vh;
+  background-image: url('https://ecommerce-next-devhectorga.s3.us-east-2.amazonaws.com/static/bg-web.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
 
   .content {
     background-color: $background-grey-light;
-    height: 100vh;
+    height: calc(100vh - 130px);
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.75);
+    overflow-y: scroll;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
   }
 
   &__left {
