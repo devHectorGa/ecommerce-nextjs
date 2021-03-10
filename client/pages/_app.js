@@ -1,15 +1,26 @@
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 import '../scss/global.scss';
 import { ToastContainer } from 'react-toastify';
 import AuthContext from '../context/AuthContext';
+import jwtDecode from 'jwt-decode';
+import { setToken } from '../api/token';
 import 'semantic-ui-css/semantic.min.css';
 import 'react-toastify/dist/ReactToastify.css';
 
 export default function MyApp({ Component, pageProps }) {
+  const [auth, setAuth] = useState(undefined);
+  const login = (token) => {
+    setToken(token);
+    setAuth({
+      token,
+      idUser: jwtDecode(token).id,
+    });
+  };
+
   const authData = useMemo(
     () => ({
-      auth: { name: '', email: '' },
-      login: () => null,
+      auth,
+      login,
       logout: () => null,
       setReloadUser: () => null,
     }),

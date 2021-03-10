@@ -9,6 +9,7 @@ import useAuth from '../../../hooks/useAuth';
 export default function LoginForm(props) {
   const { showRegisterForm, onCloseModal } = props;
   const [loading, setLoading] = useState(false);
+  const { login } = useAuth();
   const formik = useFormik({
     initialValues: initialValues(),
     validationSchema: Yup.object(validationSchema()),
@@ -16,16 +17,14 @@ export default function LoginForm(props) {
       setLoading(true);
       const response = await loginApi(formData);
       if (response?.jwt) {
-        console.log('login OK');
+        login(response.jwt);
         onCloseModal();
       } else {
-        toast.error();
+        toast.error('Usuario o contraseña incorrecto');
       }
       setLoading(false);
     },
   });
-  const auth = useAuth();
-  console.log(auth);
 
   return (
     <Form className="login-form" onSubmit={formik.handleSubmit}>
