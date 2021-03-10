@@ -9,7 +9,7 @@ import useAuth from '../../../hooks/useAuth';
 export default function LoginForm(props) {
   const { showRegisterForm, onCloseModal } = props;
   const [loading, setLoading] = useState(false);
-  const { login } = useAuth();
+  const { auth, login } = useAuth();
   const formik = useFormik({
     initialValues: initialValues(),
     validationSchema: Yup.object(validationSchema()),

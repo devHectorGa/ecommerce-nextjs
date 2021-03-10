@@ -1,14 +1,29 @@
-import { useMemo, useState } from 'react';
+import { useMemo, useState, useEffect } from 'react';
 import '../scss/global.scss';
 import { ToastContainer } from 'react-toastify';
 import AuthContext from '../context/AuthContext';
 import jwtDecode from 'jwt-decode';
-import { setToken } from '../api/token';
+import { setToken, getToken } from '../api/token';
 import 'semantic-ui-css/semantic.min.css';
 import 'react-toastify/dist/ReactToastify.css';
 
 export default function MyApp({ Component, pageProps }) {
   const [auth, setAuth] = useState(undefined);
+  const [reloadUser, setReloadUser] = useState(false);
+
+  useEffect(() => {
+    const token = getToken();
+    if (token) {
+      setAuth({
+        token,
+        idUser: jwtDecode(token).id,
+      });
+    } else {
+      setAuth(null);
+    }
+    setReloadUser(false);
+  }, [reloadUser]);
+
   const login = (token) => {
     setToken(token);
     setAuth({
@@ -22,10 +37,13 @@ export default function MyApp({ Component, pageProps }) {
       auth,
       login,
       logout: () => null,
-      setReloadUser: () => null,
+      setReloadUser,
     }),
-    []
+    [auth]
   );
+
+  if (auth === undefined) return null;
+
   return (
     <AuthContext.Provider value={authData}>
       <Component {...pageProps} />
