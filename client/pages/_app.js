@@ -1,11 +1,22 @@
+import { useMemo } from 'react';
 import '../scss/global.scss';
-import 'semantic-ui-css/semantic.min.css';
 import { ToastContainer } from 'react-toastify';
+import AuthContext from '../context/AuthContext';
+import 'semantic-ui-css/semantic.min.css';
 import 'react-toastify/dist/ReactToastify.css';
 
 export default function MyApp({ Component, pageProps }) {
+  const authData = useMemo(
+    () => ({
+      auth: { name: '', email: '' },
+      login: () => null,
+      logout: () => null,
+      setReloadUser: () => null,
+    }),
+    []
+  );
   return (
-    <>
+    <AuthContext.Provider value={authData}>
       <Component {...pageProps} />
       <ToastContainer
         position="top-right"
@@ -18,6 +29,6 @@ export default function MyApp({ Component, pageProps }) {
         draggable
         pauseOnHover
       />
-    </>
+    </AuthContext.Provider>
   );
 }

@@ -4,6 +4,7 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { toast } from 'react-toastify';
 import { loginApi } from '../../../api/user';
+import useAuth from '../../../hooks/useAuth';
 
 export default function LoginForm(props) {
   const { showRegisterForm, onCloseModal } = props;
@@ -23,6 +24,8 @@ export default function LoginForm(props) {
       setLoading(false);
     },
   });
+  const auth = useAuth();
+  console.log(auth);
 
   return (
     <Form className="login-form" onSubmit={formik.handleSubmit}>
