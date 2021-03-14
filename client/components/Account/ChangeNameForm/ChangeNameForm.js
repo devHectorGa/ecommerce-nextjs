@@ -6,7 +6,7 @@ import { toast } from 'react-toastify';
 import { updateNameApi } from '../../../api/user';
 
 export default function ChangeNameForm(props) {
-  const { user, logout } = props;
+  const { user, logout, setReloadUser } = props;
   const [loading, setLoading] = useState(false);
 
   const formik = useFormik({
@@ -18,6 +18,9 @@ export default function ChangeNameForm(props) {
 
       if (!response) {
         toast.error('Error al actualizar el nombre y apellido');
+      } else {
+        setReloadUser(true);
+        toast.success('Nombre y apellidos actualizados.');
       }
       setLoading(false);
     },
