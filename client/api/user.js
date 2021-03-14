@@ -67,3 +67,21 @@ export async function getMeApi(logout) {
     return error;
   }
 }
+
+export async function updateNameApi(idUser, data, logout) {
+  try {
+    const url = `${BASE_PATH}/users/${idUser}`;
+    const paramas = {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    };
+    const result = await authFetch(url, paramas, logout);
+    return result || null;
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
+}
