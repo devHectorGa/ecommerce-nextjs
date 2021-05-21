@@ -14,7 +14,7 @@ export default function ChangePasswordForm(props) {
     validationSchema: Yup.object(validationSchema),
     onSubmit: async (formData) => {
       setLoading(true);
-      const result = await updatePasswordApi(
+      const response = await updatePasswordApi(
         user.id,
         formData.password,
         logout
