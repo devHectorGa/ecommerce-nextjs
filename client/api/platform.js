@@ -1,4 +1,4 @@
-import { BASE_PATH } from '../utils/constants';
+import { BASE_PATH } from '../utils/constants?_sort=position:asc';
 
 export async function getPlatformApi() {
   try {

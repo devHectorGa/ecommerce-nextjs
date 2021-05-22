@@ -22,7 +22,7 @@ function Logo() {
   return (
     <Link href="/">
       <a>
-        <Image src="./logo.webp" alt="devHectorGa" />
+        <Image src="/logo.webp" alt="devHectorGa" />
       </a>
     </Link>
   );
