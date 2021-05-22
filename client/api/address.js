@@ -47,3 +47,20 @@ export async function deleteAddressApi(idAddresses, logout) {
     return false;
   }
 }
+
+export async function updateAddressApi(idAddresses, address, logout) {
+  try {
+    const url = `${BASE_PATH}/addresses/${idAddresses}`;
+    const params = {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(address),
+    };
+    const result = await authFetch(url, params, logout);
+    if (result.statusCode >= 300) throw new Error('Error del servidor');
+    return result;
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
+}
