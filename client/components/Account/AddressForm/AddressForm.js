@@ -25,7 +25,7 @@ export default function AddressForm({ setShowModal, setReloadAddresses }) {
       toast.error('Error al crear la dirección');
     } else {
       formik.resetForm();
-      setReloadAddresses(true);
+      setReloadAddresses();
       setShowModal(false);
     }
     setLoading(false);
