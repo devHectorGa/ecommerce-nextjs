@@ -71,12 +71,13 @@ function Addresses() {
 
   const handleReload = () => setReloadAddresses(!reloadAddresses);
 
-  const openModal = (title) => {
+  const openModal = (title, address) => {
     setTitleModal(title);
     setFormModal(
       <AddressForm
         setShowModal={setShowModal}
         setReloadAddresses={handleReload}
+        address={address || null}
       />
     );
     setShowModal(true);
@@ -92,6 +93,7 @@ function Addresses() {
         <ListAddress
           reloadAddresses={reloadAddresses}
           setReloadAddresses={handleReload}
+          openModal={openModal}
         />
       </div>
       <BasicModal show={showModal} setShow={setShowModal} title={titleModal}>
