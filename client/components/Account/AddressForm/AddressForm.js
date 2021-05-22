@@ -5,7 +5,7 @@ import * as Yup from 'yup';
 import useAuth from '../../../hooks/useAuth';
 import { createAddressApi } from '../../../api/address';
 
-export default function AddressForm({ setShowModal }) {
+export default function AddressForm({ setShowModal, setReloadAddresses }) {
   const [loading, setLoading] = useState(false);
   const { auth, logout } = useAuth();
 
@@ -25,6 +25,7 @@ export default function AddressForm({ setShowModal }) {
       toast.error('Error al crear la dirección');
     } else {
       formik.resetForm();
+      setReloadAddresses(true);
       setShowModal(false);
     }
     setLoading(false);
