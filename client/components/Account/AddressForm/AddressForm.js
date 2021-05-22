@@ -1,13 +1,24 @@
 import { Form, Button } from 'semantic-ui-react';
+import { useFormik } from 'formik';
+import * as Yup from 'yup';
 
 export default function AddressForm() {
+  const formik = useFormik({
+    initialValues: initialValues(),
+    validationSchema: Yup.object(validationSchema()),
+    onSubmit: async (formData) => {},
+  });
+
   return (
-    <Form>
+    <Form onSubmit={formik.handleSubmit}>
       <Form.Input
         name="title"
         type="text"
         label="Titulo de la dirección"
         placeholder="Titulo de la dirección"
+        onChange={formik.handleChange}
+        value={formik.values.title}
+        error={formik.errors.title}
       />
       <Form.Group widths="equal">
         <Form.Input
@@ -15,12 +26,18 @@ export default function AddressForm() {
           type="text"
           label="Nombre y Apellidos"
           placeholder="Nombre y Apellidos"
+          onChange={formik.handleChange}
+          value={formik.values.name}
+          error={formik.errors.name}
         />
         <Form.Input
           name="address"
           type="text"
           label="Dirección"
           placeholder="Dirección"
+          onChange={formik.handleChange}
+          value={formik.values.address}
+          error={formik.errors.address}
         />
       </Form.Group>
       <Form.Group widths="equal">
@@ -29,12 +46,18 @@ export default function AddressForm() {
           type="text"
           label="Ciudad"
           placeholder="Ciudad"
+          onChange={formik.handleChange}
+          value={formik.values.city}
+          error={formik.errors.city}
         />
         <Form.Input
           name="state"
           type="text"
           label="Estado/Provincia/Región"
           placeholder="Estado/Provincia/Región"
+          onChange={formik.handleChange}
+          value={formik.values.state}
+          error={formik.errors.state}
         />
       </Form.Group>
       <Form.Group widths="equal">
@@ -43,12 +66,18 @@ export default function AddressForm() {
           type="text"
           label="Código postal"
           placeholder="Código postal"
+          onChange={formik.handleChange}
+          value={formik.values.postalCode}
+          error={formik.errors.postalCode}
         />
         <Form.Input
           name="phone"
           type="text"
           label="Número de teléfono"
           placeholder="Número de teléfono"
+          onChange={formik.handleChange}
+          value={formik.values.phone}
+          error={formik.errors.phone}
         />
       </Form.Group>
       <div class="actions">
@@ -58,4 +87,28 @@ export default function AddressForm() {
       </div>
     </Form>
   );
+}
+
+function initialValues() {
+  return {
+    title: '',
+    name: '',
+    address: '',
+    city: '',
+    state: '',
+    postalCode: '',
+    phone: '',
+  };
+}
+
+function validationSchema() {
+  return {
+    title: Yup.string().required(),
+    name: Yup.string().required(),
+    address: Yup.string().required(),
+    city: Yup.string().required(),
+    state: Yup.string().required(),
+    postalCode: Yup.string().required(),
+    phone: Yup.string().required(),
+  };
 }
