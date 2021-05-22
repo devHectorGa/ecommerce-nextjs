@@ -5,8 +5,10 @@ import BasicModal from '../../Modal/BasicModal';
 import Auth from '../../Auth';
 import useAuth from '../../../hooks/useAuth';
 import { getMeApi } from '../../../api/user';
+import { getPlatformApi } from '../../../api/platform';
 
 export default function MenuWeb() {
+  const [platforms, usePlatforms] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [titleModal, setTitleModal] = useState('Inicia Sesión');
   const [user, setUser] = useState(undefined);
@@ -18,6 +20,13 @@ export default function MenuWeb() {
       setUser(response);
     })();
   }, [auth]);
+
+  useEffect(() => {
+    (async () => {
+      const response = await getPlatformApi();
+      setPlatform(response || []);
+    })();
+  }, []);
 
   const onShowModal = () => setShowModal(true);
   const onCloseModal = () => setShowModal(false);
