@@ -14,3 +14,19 @@ export async function getLastGamesApi(limit = 10) {
     return null;
   }
 }
+
+export async function getGamesPlatformApi(platform, limit = 10, start) {
+  try {
+    const limitItems = `_limit=${limit}`;
+    const sortItems = `_sort=createdAt:desc`;
+    const startItems = `_start=${start}`;
+    const url = `${BASE_PATH}/games/?platform.url=${platform}&${limitItems}&${sortItems}&${startItems}`;
+    const response = await fetch(url);
+    const result = await response.json();
+    if (response.status > 300) throw new Error('Error en el servidor');
+    return result;
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
+}
