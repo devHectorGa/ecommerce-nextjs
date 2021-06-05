@@ -7,7 +7,7 @@ export default function InfoGame({ game }) {
       <div className="info-game__wrapper-video">
         <ReactPlayer url={game.video} width="100%" height="auto" controls />
       </div>
-      <CarouselScreenshots screenshots={game.screenshots} />
+      <CarouselScreenshots title={game.title} screenshots={game.screenshots} />
     </div>
   );
 }
