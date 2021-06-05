@@ -3,7 +3,7 @@ import { Grid, Image, Icon, Button } from 'semantic-ui-react';
 import { size } from 'lodash';
 import classNames from 'classnames';
 import useAuth from '../../../hooks/useAuth';
-import { isFavoriteApi } from '../../../api/favorite';
+import { isFavoriteApi, addFavoriteApi } from '../../../api/favorite';
 
 export default function HeaderGame({ game }) {
   const { poster, title } = game;
@@ -22,6 +22,7 @@ export default function HeaderGame({ game }) {
 function Info({ game }) {
   const { title, summary, price, discount } = game;
   const [isFavorite, setIsFavorite] = useState(false);
+  const [reloadFavorite, setReloadFavorite] = useState(false);
   const { auth, logout } = useAuth();
 
   useEffect(() => {
@@ -34,9 +35,14 @@ function Info({ game }) {
     } else {
       setIsFavorite(false);
     }
-  }, [auth, game, logout]);
+  }, [auth, game, logout, reloadFavorite]);
 
-  const addFavorite = () => console.log('Añadir');
+  const addFavorite = async () => {
+    if (auth) {
+      await addFavoriteApi(auth.idUser, game.id, logout);
+      setReloadFavorite(!reloadFavorite);
+    }
+  };
 
   const deleteFavorite = () => console.log('Eliminar');
 
