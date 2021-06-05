@@ -3,6 +3,7 @@ import { useRouter } from 'next/router';
 import BasicLayout from '../layouts/BasicLayout';
 import { getGameByUrlApi } from '../api/game';
 import HeaderGame from '../components/Game/HeaderGame';
+import TabsGame from '../components/Game/TabsGame';
 import { Loader } from 'semantic-ui-react';
 
 export default function Game() {
@@ -23,7 +24,7 @@ export default function Game() {
       {game?.title ? (
         <>
           <HeaderGame game={game} />
-          <p>Tab Game</p>
+          <TabsGame game={game} />
         </>
       ) : (
         <Loader active>Cargando juego</Loader>
