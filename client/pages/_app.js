@@ -7,6 +7,8 @@ import { useRouter } from 'next/router';
 import { setToken, getToken, removeToken } from '../api/token';
 import 'semantic-ui-css/semantic.min.css';
 import 'react-toastify/dist/ReactToastify.css';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 
 export default function MyApp({ Component, pageProps }) {
   const [auth, setAuth] = useState(undefined);
