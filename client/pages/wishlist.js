@@ -6,7 +6,7 @@ import useAuth from '../hooks/useAuth';
 import { Loader } from 'semantic-ui-react';
 import ListGames from '../components/ListGames';
 
-export default function wishlist() {
+export default function Wishlist() {
   const [games, setGames] = useState(null);
   const [loading, setLoading] = useState(false);
   const { auth, logout } = useAuth();
