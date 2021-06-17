@@ -1,11 +1,14 @@
 import { useState, useEffect } from 'react';
 import BasicLayout from '../layouts/BasicLayout';
-import { searchGamesApi } from '../api/game';
+import { Loader } from 'semantic-ui-react';
 import { useRouter } from 'next/router';
+import { searchGamesApi, getLastGamesApi } from '../api/game';
+import ListGames from '../components/ListGames';
 
 export default function Search() {
   const [games, setGames] = useState(null);
-  const { query } = useRouter();
+  const [loading, setLoading] = useState(false);
+  const { query, push } = useRouter();
 
   useEffect(() => {
     document.getElementById('search-game').focus();
@@ -13,6 +16,7 @@ export default function Search() {
 
   useEffect(() => {
     (async () => {
+      setLoading(true);
       const decodeQuery = decodeURIComponent(query?.query || '');
       if (decodeQuery?.length) {
         const response = await searchGamesApi(decodeQuery);
@@ -22,14 +26,23 @@ export default function Search() {
           setGames([]);
         }
       } else {
-        setGames([]);
+        const response = await getLastGamesApi();
+        setGames(response);
       }
+      setLoading(false);
     })();
   }, [query]);
 
   return (
     <BasicLayout className="search">
-      <h1>Búsqueda...</h1>
+      {loading ? (
+        <Loader active={loading}>Cargando juegos</Loader>
+      ) : (
+        <>
+          {games?.length > 0 && <ListGames className="content" games={games} />}
+          {!games?.length && <h3>No se han encontrado juegos</h3>}
+        </>
+      )}
     </BasicLayout>
   );
 }
