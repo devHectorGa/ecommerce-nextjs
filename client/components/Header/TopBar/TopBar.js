@@ -38,7 +38,9 @@ function Search() {
     if (searchStr.length) {
       router.push(`/search?query=${encodeURIComponent(searchStr)}`);
     } else {
-      setLoad(true);
+      if (router?.query?.query?.length) {
+        router.push(`/search`);
+      }
     }
   }, [searchStr]);
 
