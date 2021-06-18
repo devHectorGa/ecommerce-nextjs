@@ -6,6 +6,7 @@ import CartContext from '../context/CartContext';
 import jwtDecode from 'jwt-decode';
 import { useRouter } from 'next/router';
 import { setToken, getToken, removeToken } from '../api/token';
+import { getProductsCart } from '../api/cart';
 import 'semantic-ui-css/semantic.min.css';
 import 'react-toastify/dist/ReactToastify.css';
 import 'slick-carousel/slick/slick.css';
@@ -59,7 +60,7 @@ export default function MyApp({ Component, pageProps }) {
     () => ({
       productsCart: 0,
       addProductCart: () => null,
-      getProductCart: () => null,
+      getProductsCart,
       removeProductCart: () => null,
       removeAllProductsCart: () => null,
     }),
