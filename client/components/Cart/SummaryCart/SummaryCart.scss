@@ -30,4 +30,18 @@
       }
     }
   }
+
+  &__resume {
+    td {
+      &:last-of-type {
+        text-align: center !important;
+      }
+    }
+
+    .total-price {
+      color: $primary;
+      font-weight: bold;
+      font-size: 20px;
+    }
+  }
 }
