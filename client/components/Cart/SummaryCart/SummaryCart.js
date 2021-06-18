@@ -1,10 +1,11 @@
-import { useState, useEffect } from 'react';
-import { Table, Image, Icon } from 'semantic-ui-react';
-import { forEach, map } from 'lodash';
-import useCart from '../../../hooks/useCart';
+import { useState, useEffect } from "react";
+import { Table, Image, Icon } from "semantic-ui-react";
+import { map } from "lodash";
+import useCart from "../../../hooks/useCart";
 
 export default function SummaryCart({ products }) {
   const [totalPrice, setTotalPrice] = useState(0);
+  const { removeProductCart } = useCart();
 
   useEffect(() => {
     if (products?.length) {
@@ -16,7 +17,11 @@ export default function SummaryCart({ products }) {
     } else {
       setTotalPrice(0);
     }
-  }, [JSON.stringify(products)]);
+  }, [products]);
+
+  const removeProduct = (product) => {
+    removeProductCart(product);
+  };
 
   return (
     <div className="summary-cart">
@@ -35,7 +40,11 @@ export default function SummaryCart({ products }) {
             {map(products, (product) => (
               <Table.Row key={product.id} className="summary-cart__product">
                 <Table.Cell>
-                  <Icon name="close" link onClick={() => null} />
+                  <Icon
+                    name="close"
+                    link
+                    onClick={() => removeProduct(product.url)}
+                  />
                   <Image src={product.poster.url} alt={product.title} />
                   {product.title}
                 </Table.Cell>

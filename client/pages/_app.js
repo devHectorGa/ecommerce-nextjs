@@ -10,6 +10,7 @@ import {
   getProductsCart,
   addProductCart,
   countProductsCart,
+  removeProductCart,
 } from '../api/cart';
 import 'semantic-ui-css/semantic.min.css';
 import 'react-toastify/dist/ReactToastify.css';
@@ -66,6 +67,11 @@ export default function MyApp({ Component, pageProps }) {
     }
   };
 
+  const removeProduct = (product) => {
+    removeProductCart(product);
+    setReloadCart(!reloadCart);
+  };
+
   const authData = useMemo(
     () => ({
       auth,
@@ -81,7 +87,7 @@ export default function MyApp({ Component, pageProps }) {
       productsCart: totalProductsCart,
       addProductCart: (product) => addProduct(product),
       getProductsCart,
-      removeProductCart: () => null,
+      removeProductCart: (product) => removeProduct(product),
       removeAllProductsCart: () => null,
     }),
     [totalProductsCart]
