@@ -22,6 +22,7 @@ function EmptyCart() {
 
 function FullCart({ products }) {
   const [productsData, setProductsData] = useState(null);
+  const [address, setAddress] = useState(null);
 
   useEffect(() => {
     (async () => {
@@ -37,7 +38,7 @@ function FullCart({ products }) {
   return (
     <BasicLayout>
       <SummaryCart products={productsData} />
-      <AddressShipping />
+      <AddressShipping setAddress={setAddress} />
     </BasicLayout>
   );
 }
