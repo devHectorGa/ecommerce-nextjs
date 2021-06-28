@@ -1,8 +1,9 @@
-import { useState, useEffect } from "react";
-import BasicLayout from "../layouts/BasicLayout";
-import { getGameByUrlApi } from "../api/game";
-import useCart from "../hooks/useCart";
-import SummaryCart from "../components/Cart/SummaryCart";
+import { useState, useEffect } from 'react';
+import BasicLayout from '../layouts/BasicLayout';
+import { getGameByUrlApi } from '../api/game';
+import useCart from '../hooks/useCart';
+import SummaryCart from '../components/Cart/SummaryCart';
+import AddressShipping from '../components/Cart/AddressShipping';
 
 export default function Cart() {
   const { getProductsCart } = useCart();
@@ -36,6 +37,7 @@ function FullCart({ products }) {
   return (
     <BasicLayout>
       <SummaryCart products={productsData} />
+      <AddressShipping />
     </BasicLayout>
   );
 }
