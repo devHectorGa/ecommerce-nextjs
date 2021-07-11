@@ -8,15 +8,29 @@ import useAuth from '../../../../hooks/useAuth';
 import useCart from '../../../../hooks/useCart';
 
 export default function FormPayment({ products, address }) {
-  const handleSubmit = (e) => {
+  const [loading, setLoading] = useState(false);
+  const stripe = useStripe();
+  const elements = useElements();
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Realizando pago');
+    setLoading(true);
+    if (stripe || elements) {
+      const cardElement = elements.getElement(CardElement);
+      const result = await stripe.createToken(cardElement);
+
+      if (result.error) toast.error(result.error.message);
+      else console.log(result);
+    }
+    setLoading(false);
   };
 
   return (
     <form className="form-payment" onSubmit={handleSubmit}>
       <CardElement />
-      <Button type="submit">Pagar</Button>
+      <Button type="submit" loading={loading} disabled={!stripe}>
+        Pagar
+      </Button>
     </form>
   );
 }
