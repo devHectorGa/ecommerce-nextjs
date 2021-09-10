@@ -9,7 +9,6 @@ import Payment from '../components/Cart/Payment';
 export default function Cart() {
   const { getProductsCart } = useCart();
   const products = getProductsCart();
-
   return products?.length ? <FullCart products={products} /> : <EmptyCart />;
 }
 
@@ -41,7 +40,7 @@ function FullCart({ products }) {
       <SummaryCart products={productsData} />
       <AddressShipping setAddress={setAddress} />
 
-      {address && <Payment products={products} address={address} />}
+      {address && <Payment products={productsData} address={address} />}
     </BasicLayout>
   );
 }
