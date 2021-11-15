@@ -1,6 +1,5 @@
 .order {
   display: flex;
-  justify-content: space-between;
   height: 100px;
   margin-bottom: 10px;
   background-color: $background-light;
@@ -11,6 +10,8 @@
   }
 
   &__info {
+    width: 100%;
+    justify-content: space-between;
     display: flex;
     a {
       height: 100%;
@@ -19,6 +20,33 @@
         height: 100%;
         margin-right: 20px;
       }
+    }
+
+    &-data {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+
+      h2 {
+        font-size: 16px;
+        margin-bottom: 5px;
+      }
+    }
+  }
+
+  &__other {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: 10px;
+
+    &-date {
+      margin: 0 20px 0 0;
+    }
+
+    i {
+      padding-left: 20px;
+      color: $primary;
     }
   }
 }
