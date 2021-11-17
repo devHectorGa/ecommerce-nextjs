@@ -6,6 +6,7 @@ import 'moment/locale/es';
 import BasicModal from '../../Modal/BasicModal';
 
 export default function Order({ order }) {
+  const [showModal, setShowModal] = useState(false);
   const { game, totalPayment, createdAt, addressShipping } = order;
   const { title, poster, url } = game;
 
@@ -28,10 +29,50 @@ export default function Order({ order }) {
             <p className="order__other-date">
               {moment(createdAt).format('L')} - {moment(createdAt).format('LT')}
             </p>
-            <Icon name="eye" circular link onClick={() => null} />
+            {addressShipping && (
+              <Icon
+                name="eye"
+                circular
+                link
+                onClick={() => setShowModal(true)}
+              />
+            )}
           </div>
         </div>
       </div>
+      {addressShipping && (
+        <AddressModal
+          showModal={showModal}
+          setShowModal={setShowModal}
+          addressShipping={addressShipping}
+          title={title}
+        />
+      )}
     </>
+  );
+}
+
+function AddressModal({ showModal, setShowModal, addressShipping, title }) {
+  return (
+    <BasicModal
+      show={showModal}
+      setShow={setShowModal}
+      size="tiny"
+      title={title}
+    >
+      {addressShipping && (
+        <>
+          <h3>El pedido se ha enviado a la siguiente dirección: </h3>
+          <div>
+            <p>{addressShipping?.name}</p>
+            <p>{addressShipping?.address}</p>
+            <p>
+              {addressShipping?.state}, {addressShipping?.city}{' '}
+              {addressShipping?.postalCode}
+            </p>
+          </div>
+        </>
+      )}
+    </BasicModal>
   );
 }
