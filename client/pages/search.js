@@ -4,6 +4,7 @@ import { Loader } from 'semantic-ui-react';
 import { useRouter } from 'next/router';
 import { searchGamesApi, getLastGamesApi } from '../api/game';
 import ListGames from '../components/ListGames';
+import Seo from '../components/Seo';
 
 export default function Search() {
   const [games, setGames] = useState(null);
@@ -35,6 +36,7 @@ export default function Search() {
 
   return (
     <BasicLayout className="search">
+      <Seo title={`Buscando ${query.query}`} />
       {loading ? (
         <Loader active={loading}>Cargando juegos</Loader>
       ) : (

@@ -3,6 +3,7 @@ import { Loader } from 'semantic-ui-react';
 import BasicLayout from '../layouts/BasicLayout';
 import { getLastGamesApi } from '../api/game';
 import ListGames from '../components/ListGames';
+import Seo from '../components/Seo';
 
 export default function Home() {
   const [games, setGames] = useState(null);
@@ -17,6 +18,7 @@ export default function Home() {
   }, []);
   return (
     <BasicLayout className="home">
+      <Seo />
       {loadingHome ? (
         <Loader active={loadingHome}>Cargando juegos</Loader>
       ) : (
